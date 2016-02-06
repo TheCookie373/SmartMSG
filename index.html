@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html>
+
+
+
+<head>
+
+<style>
+
+img {
+    -webkit-filter: grayscale(15%); /* Chrome, Safari, Opera */
+    filter: grayscale(15%);
+}
+
+html {background-color: white;}
+
+.sidenav {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #111;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+}
+
+.sidenav a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: white;
+    display: block;
+    transition: 0.3s
+}
+
+.sidenav a:hover, .offcanvas a:focus{
+    color: green;
+}
+
+.closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px !important;
+    margin-left: 50px;
+}
+
+@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
+}
+
+.tooltip {
+    position: relative;
+    display: inline-block;
+    border-bottom: 1px dotted black;
+}
+
+.tooltip .tooltiptext {
+    visibility: hidden;
+    width: 120px;
+    background-color: #555;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: 50%;
+    margin-left: -60px;
+    opacity: 0;
+    transition: opacity 1s;
+}
+
+.tooltip .tooltiptext::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #555 transparent transparent transparent;
+}
+
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+    opacity: 1;
+}
+
+body {font-family: "Arial";}
+/* Center the loader */
+#loader {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  z-index: 1;
+  width: 150px;
+  height: 150px;
+  margin: -75px 0 0 -75px;
+  border: 16px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 16px solid #3498db;
+  border-bottom: 16px solid green;
+  border-left: 16px solid red;
+  border-right: 16px solid yellow;
+  width: 120px;
+  height: 120px;
+  -webkit-animation: spin 2s linear infinite;
+  animation: spin 2s linear infinite;
+}
+
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(360deg); }
+  100% { transform: rotate(355deg); }
+}
+
+/* Add animation to "page content" */
+.animate-bottom {
+  position: relative;
+  -webkit-animation-name: animatebottom;
+  -webkit-animation-duration: 1s;
+  animation-name: animatebottom;
+  animation-duration: 1s
+}
+
+@-webkit-keyframes animatebottom {
+  from { bottom:-100px; opacity:0 } 
+  to { bottom:0px; opacity:1 }
+}
+
+@keyframes animatebottom { 
+  from{ bottom:-100px; opacity:0 } 
+  to{ bottom:0; opacity:1 }
+}
+
+#myDiv {
+  display: none;
+  text-align: center;
+}
+
+.chip {
+    display: inline-block;
+    padding: 0 7px;
+    height: 50px;
+    font-size: 18px;
+    line-height: 50px;
+    border-radius: 25px;
+    background-color: lightgreen;
+}
+
+.chip img {
+    float: left;
+    margin: 0 10px 0 -25px;
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+}
+
+.closebtn {
+    padding-left: 10px;
+    color: #888;
+    font-weight: bold;
+    float: right;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.closebtn:hover {
+    color: #000;
+}
+
+/* The Modal (background) */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+}
+
+/* The Close Button */
+.close {
+    color: #aaaaaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+h1 { font-family: "Arial" }
+h2 { font-family: "Arial" }
+p { font-family: "Arial" }
+
+ul.pagination {
+    display: inline-block;
+    padding: 0;
+    margin: 0;
+}
+
+ul.pagination li {display: inline;}
+
+ul.pagination li a {
+    color: black;
+    float: left;
+    padding: 8px 16px;
+    text-decoration: none;
+    transition: background-color .3s;
+}
+
+ul.pagination li a.active {
+    background-color: #4CAF50;
+    color: white;
+}
+
+ul.pagination li a:hover:not(.active) {background-color: #ddd;}
+
+</style>
+<div id="loader"></div>
+</head>
+<body onload="myFunction()" style="margin:0;">
+
+
+
+<div style="display:none;" id="myDiv" class="animate-bottom">
+<div id="mySidenav" class="sidenav">
+  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+  <a href="#">Home</a>		
+  <a href="#">Add Contacts</a>		
+  <a href="#">Report Bug</a>		
+  <a href="#">Credits</a>			
+</div>
+<span style="font-size:30px;cursor:pointer" onclick="openNav()">☰ Menu</span>
+<br>
+<br>
+  <h1>Welcome to SmartMSG</h1>
+<IMG STYLE="position:absolute; TOP:110px; LEFT:420px; WIDTH:80px; HEIGHT:50px" SRC="http://www.trafficjamgang.co.uk/images/beta_icon.png">
+  <h2>Contacts:</h2>
+
+
+ 
+<div class="chip">
+  <img src="https://upload.wikimedia.org/wikipedia/en/e/ee/Unknown-person.gif" alt="Person" width="96" height="96">
+  James Horrocks
+  
+<!-- Trigger/Open The Modal -->
+<button id="myBtn">Send Message</button>
+<br>
+<br>
+<div class="chip">
+  <img src="https://upload.wikimedia.org/wikipedia/en/e/ee/Unknown-person.gif" alt="Person" width="96" height="96">
+  Kate Horrocks
+<div class="tooltip">
+
+  <span class="tooltiptext">Not Working!</span>
+
+
+ <input type="button" id="CodeErrorMSG" value="Send Message" onclick="alert('Error FX4745 (Error in JS code) Please Contact Developer')"/>   
+
+
+ </div>                                                                                                                                            
+   
+ </script>
+<ul class="pagination">
+  <li><a href="#">«</a></li>
+  <li><a class="active" href="#">1</a></li>
+  <li><a href="#">2</a></li>
+  <li><a href="#">3</a></li>
+  <li><a href="#">4</a></li>
+  <li><a href="#">5</a></li>
+  <li><a href="#">6</a></li>
+  <li><a href="#">»</a></li>
+</ul>
+
+<!-- The Modal -->
+<div id="myModal" class="modal">
+
+
+  <!-- Modal content -->
+  <div class="modal-content">
+    <span class="close">×</span>
+    <form>
+   <h3>Send Message:</h3><br>
+  <input type="text" name="MSGsend">
+<input type="button" value="Send!" onclick="alert('Sent!')">
+</form>
+
+
+  
+  </div>
+
+
+</div>
+
+  
+
+</div>
+
+<script>
+var myVar;
+
+function myFunction() {
+    myVar = setTimeout(showPage, 3000);
+}
+
+function showPage() {
+  document.getElementById("loader").style.display = "none";
+  document.getElementById("myDiv").style.display = "block";
+}
+// Get the modal
+var modal = document.getElementById('myModal');
+
+
+
+// Get the button that opens the modal
+var btn = document.getElementById("myBtn");
+
+
+
+
+
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks the button, open the modal 
+btn.onclick = function() {
+    modal.style.display = "block";
+}
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+    modal.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+
+    }
+}
+
+function openNav() {
+    document.getElementById("mySidenav").style.width = "250px";
+}
+
+function closeNav() {
+    document.getElementById("mySidenav").style.width = "0";
+}
+window.onbeforeunload = function(){
+  return '';
+};
+
+</script>
+
+</body>
+</html>
